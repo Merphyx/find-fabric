@@ -1,6 +1,0 @@
-{
-  "package": "me.lunaluna.find.fabric.mixins",
-  "client": [
-    "HandledScreenMixin"
-  ]
-}
