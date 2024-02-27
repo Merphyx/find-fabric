@@ -3,6 +3,7 @@ package me.lunaluna.find.fabric.mixins;
 import me.lunaluna.find.fabric.Startup;
 import me.lunaluna.find.fabric.config.Config;
 import me.lunaluna.find.fabric.widget.FindWidget;
+
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
