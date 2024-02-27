@@ -58,10 +58,18 @@ public class FindWidget extends TextFieldWidget {
 
         return  matchItemId(stack, searchText) ||
                 matchDisplayName(stack, searchText) ||
-                matchNbtData(stack, searchText) ||
+                matchesNbtData(stack, searchText) ||
                 matchBlockEntityTag(stack);
     }
 
+    private boolean matchesNbtData(ItemStack stack, String searchText) {
+        NbtCompound nbt = stack.getNbt();
+        if (nbt != null) {
+            return matchNbtDisplayName(nbt, searchText) || matchEnchantments(nbt, searchText) || matchPotionEffects(nbt, searchText);
+        }
+        return false;
+    }
+    
     private boolean matchItemId(ItemStack stack, String searchText) {
         Identifier itemId = Registries.ITEM.getId(stack.getItem());
         return itemId.toString().toLowerCase().contains(searchText);
@@ -70,14 +78,6 @@ public class FindWidget extends TextFieldWidget {
     private boolean matchDisplayName(ItemStack stack, String searchText) {
         Text translatedText = Text.translatable(stack.getItem().getTranslationKey());
         return matchString(translatedText.getString(), searchText);
-    }
-
-    private boolean matchNbtData(ItemStack stack, String searchText) {
-        NbtCompound nbt = stack.getNbt();
-        if (nbt != null) {
-            return matchNbtDisplayName(nbt, searchText) || matchEnchantments(nbt, searchText) || matchPotionEffects(nbt, searchText);
-        }
-        return false;
     }
 
     private boolean matchNbtDisplayName(NbtCompound nbt, String searchText) {
